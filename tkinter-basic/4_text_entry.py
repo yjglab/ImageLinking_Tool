@@ -8,11 +8,11 @@ root.resizable(False, False) # X(너비), Y(높이) 값 변경 불가
 txt = Text(root, width=30 ,height=5) # 텍스트 위젯
 txt.pack()
 
-txt.insert(END, "글자를 입력하세요") # 입력 위치. 
+txt.insert(END, "글자를 입력하세요") # 위젯 순서. 
 
 e = Entry(root, width=30)
 e.pack()
-e.insert(0, "한 줄만 입력하세요") # 입력 위치
+e.insert(0, "한 줄만 입력하세요") # 위젯 순서.
 
 def btncmd():
     # 내용 출력
