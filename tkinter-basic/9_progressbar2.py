@@ -13,7 +13,7 @@ progressbar2.pack()
 
 def btncmd2():
     for i in range(1, 101):
-        time.sleep(0.01) # 보여주기 용 # 0.01초 대기
+        time.sleep(0.09) # 보여주기 용 # 0.09초 대기
 
         p_var2.set(i) # progress bar 값 설정
         progressbar2.update() # ui 업데이트
