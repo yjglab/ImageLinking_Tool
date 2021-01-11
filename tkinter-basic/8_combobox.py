@@ -12,7 +12,7 @@ combobox.pack()
 combobox.set("카드 결제일") # 최초 목록 제목 설정 + 값 입력도 가능
 
 readonly_combobox = ttk.Combobox(root, height=10, values=values, state="readonly") # 별도의 값 입력 불가
-readonly_combobox.current(0) # 0번 index 선택
+readonly_combobox.current(5) # 5번 index 선택
 readonly_combobox.pack()
 
 
