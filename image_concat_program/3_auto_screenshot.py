@@ -1,5 +1,5 @@
 import time
-from PIL import ImageGrab # python image ilbrary
+from PIL import ImageGrab # python image library
 
 time.sleep(5) # 5초 대기 준비시간
 
