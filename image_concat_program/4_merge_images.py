@@ -36,12 +36,12 @@ def browse_dest_path():
 def merge_img():
     images = [Image.open(i) for i in list_file.get(0, END)]
     # 현재 images 내 객체들은 size 값을 가지고 있음. # size[0] : width, size[1] : height
-    widths = [i.size[0] for i in images] 
-    heights = [i.size[1] for i in images] 
+    # widths = [i.size[0] for i in images] 
+    # heights = [i.size[1] for i in images] 
+    widths, heights = zip(*(i.size for i in images))
 
     # 최대 넓이, 전체 높이 
     max_width, total_height = max(widths), sum(heights)
-    print(max_width, total_height)
 
     # 캔버스 
     result_img = Image.new("RGB", (max_width, total_height), (255, 255, 255))
