@@ -2,12 +2,12 @@ import os
 import tkinter.ttk as ttk
 import tkinter.messagebox as msgbox
 from tkinter import *
-from tkinter import filedialog # 서브 모듈. 별도 지정 필요
+from tkinter import filedialog 
 from PIL import Image
 
 root = Tk()
 root.title("이미지 연결 도구 v.0.0.1")
-# root.geometry("640x480+900+600") 
+
 
 # 파일 추가 
 def add_file():
@@ -15,22 +15,22 @@ def add_file():
         filetypes=(\
             ("PNG 파일 (*.png)", "*.png"), ("JPEG 파일 (*.jpg)", "*.jpg"), \
             ("BMP 파일 (*.bmp)", "*.bmp"),  ("모든 파일 (*.*)", "*.*")), \
-        initialdir=r"C:\JaeGyeong\github-repository") # r: string 있는 그대로 읽음
-        # 최초에 C:/ 경로를 표시함
+        initialdir=r"C:\JaeGyeong\github-repository") 
+       
     
     for file in files:
         list_file.insert(END, file)    
 
 # 선택 삭제
 def del_file():
-    # reversed() : index 순서를 뒤집은 새로운 값. 원본에는 영향을 미치지 않음.
+   
     for index in reversed(list_file.curselection()): 
         list_file.delete(index)
 
 # 저장 경로 (폴더)
 def browse_dest_path():
     folder_selected = filedialog.askdirectory()
-    if folder_selected == "": # 사용자가 취소 누르면
+    if folder_selected == "":
         return
     txt_dest_path.delete(0, END)
     txt_dest_path.insert(0, folder_selected)
@@ -60,15 +60,11 @@ def merge_img():
         img_format = cmb_format.get().lower()
         
         images = [Image.open(i) for i in list_file.get(0, END)]
-        # 현재 images 내 객체들은 size 값을 가지고 있음. # size[0] : width, size[1] : height
-        # widths = [i.size[0] for i in images]  # heights = [i.size[1] for i in images] 
         
-        # 이미지 사이즈 리스트에 넣어서 하나씩 처리
-        image_sizes = [] # [(width1, height1), (width2, height2), ... ]
+        image_sizes = [] 
         if img_width > -1:
-            # width는 cmb값, height는 변경될 width 값에 맞춰 비율을 조정함 => x:y=x':y' | xy'=x'y | y'=x'y/x 
             image_sizes = [(int(img_width), int(img_width * i.size[1] / i.size[0])) for i in images] 
-        else: # 원본 사이즈 사용
+        else:
             image_sizes = [(i.size[0], i.size[1]) for i in images]
 
         widths, heights = zip(*(image_sizes))
@@ -81,10 +77,7 @@ def merge_img():
             total_height += (img_space * (len(images) - 1))
 
         result_img = Image.new("RGB", (max_width, total_height), (255, 255, 255))
-        y_offset = 0 # y 위치
-        # for img in images:
-        #     result_img.paste(img, (0, y_offset)) # x, y
-        #     y_offset += img.size[1]
+        y_offset = 0 
 
         for idx, img in enumerate(images): 
             # width가 원본유지가 아닌 경우 이미지 크기 조정
@@ -94,22 +87,21 @@ def merge_img():
             result_img.paste(img, (0, y_offset))
             y_offset += (img.size[1] + img_space) 
 
-            progress = (idx + 1) / len(images) * 100 # 실제 percent 정보 계산
+            progress = (idx + 1) / len(images) * 100 
             p_var.set(progress)
             progress_bar.update()
 
         # 포맷 옵션 처리
-        
         file_name = "linked_image." + img_format
         dest_path = os.path.join(txt_dest_path.get(), file_name)
         result_img.save(dest_path)
         msgbox.showinfo("성공", "작업이 완료되었습니다.")
-    except Exception as err: # 예외처리
+    except Exception as err:
         msgbox.showerror("ERROR", err)
 
 # 시작
 def start():
-    # v파일 목록 확인
+    # 파일 목록 확인
     if list_file.size() == 0:
         msgbox.showwarning("경고", "이미지 파일을 추가하세요")
         return
