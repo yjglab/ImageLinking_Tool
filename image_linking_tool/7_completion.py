@@ -8,6 +8,7 @@ from PIL import Image
 root = Tk()
 root.title("이미지 연결 도구 v.0.0.1")
 
+file_name_count = 0
 
 # 파일 추가 
 def add_file():
@@ -37,6 +38,8 @@ def browse_dest_path():
 
 # 이미지 통합 
 def merge_img():
+    global file_name_count
+    file_name_count += 1
     try:
         # 가로 넓이 
         img_width = cmb_width.get()
@@ -92,7 +95,7 @@ def merge_img():
             progress_bar.update()
 
         # 포맷 옵션 처리
-        file_name = "linked_image." + img_format
+        file_name = "linked_image_{}.".format(file_name_count) + img_format
         dest_path = os.path.join(txt_dest_path.get(), file_name)
         result_img.save(dest_path)
         msgbox.showinfo("성공", "작업이 완료되었습니다.")
