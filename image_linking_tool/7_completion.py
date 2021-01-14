@@ -15,7 +15,7 @@ def add_file():
         filetypes=(\
             ("PNG 파일 (*.png)", "*.png"), ("JPEG 파일 (*.jpg)", "*.jpg"), \
             ("BMP 파일 (*.bmp)", "*.bmp"),  ("모든 파일 (*.*)", "*.*")), \
-        initialdir=r"C:\JaeGyeong\github-repository") 
+        initialdir=r"write your directory path") 
        
     
     for file in files:
